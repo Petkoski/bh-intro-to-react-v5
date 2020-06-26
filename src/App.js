@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { render } from "react-dom";
 // import Pet from "./Pet";
 import SearchParams from "./SearchParams";
 import { Router, Link } from "@reach/router";
 import Details from "./Details";
+import ThemeContext from "./ThemeContext";
 
 const App = () => {
   // return React.createElement("div", { id: "sth-important" }, [
@@ -21,24 +22,28 @@ const App = () => {
   //   React.createElement(Pet, { name: "Doink", animal: "Cat", breed: "Mixed" }),
   // ]);
 
+  const themeHook = useState("peru");
+
   return (
     <React.StrictMode>
-      <div>
-        <header>
-          <Link to="/">
-            Adopt Me!
-            {/* <h1 id="something-important">Adopt Me!</h1> */}
-          </Link>
-        </header>
-        {/* <Pet name="Luna" animal="Dog" breed="Havanese" /> */}
-        {/* <Pet name="Pepper" animal="Bird" breed="Cockatiel" /> */}
-        {/* <Pet name="Doink" animal="Cat" breed="Mixed" /> */}
+      <ThemeContext.Provider value={themeHook}>
+        <div>
+          <header>
+            <Link to="/">
+              Adopt Me!
+              {/* <h1 id="something-important">Adopt Me!</h1> */}
+            </Link>
+          </header>
+          {/* <Pet name="Luna" animal="Dog" breed="Havanese" /> */}
+          {/* <Pet name="Pepper" animal="Bird" breed="Cockatiel" /> */}
+          {/* <Pet name="Doink" animal="Cat" breed="Mixed" /> */}
 
-        <Router>
-          <SearchParams path="/" />
-          <Details path="/details/:id" />
-        </Router>
-      </div>
+          <Router>
+            <SearchParams path="/" />
+            <Details path="/details/:id" />
+          </Router>
+        </div>
+      </ThemeContext.Provider>
     </React.StrictMode>
   );
 };

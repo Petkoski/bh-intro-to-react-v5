@@ -2,6 +2,7 @@ import React from "react";
 import Pet from "@frontendmasters/pet";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
+import ThemeContext from "./ThemeContext";
 
 // const Details = (props) => {
 //   // return <h1>Hi lol</h1>;
@@ -55,7 +56,13 @@ class Details extends React.Component {
         <div>
           <h1>{name}</h1>
           <h2>{`${animal} - ${breed} - ${location}`}</h2>
-          <button>Adopt {name}</button>
+          <ThemeContext.Consumer>
+            {(themeHook) => (
+              <button style={{ backgroundColor: themeHook[0] }}>
+                Adopt {name}
+              </button>
+            )}
+          </ThemeContext.Consumer>
           <p>{description}</p>
         </div>
       </div>
